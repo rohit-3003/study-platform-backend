@@ -1,0 +1,90 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: study-platform
+
+  # Database — switch to PostgreSQL in production
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:studydb}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: ${DATABASE_DRIVER:org.h2.Driver}
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:myDefaultDevSecretKeyThatIsLongEnoughForHS512Algorithm1234567890}
+  access-token-expiration: 900000        # 15 minutes
+  refresh-token-expiration: 604800000    # 7 days
+
+# Gemini AI Configuration
+gemini:
+  api-key: ${GEMINI_API_KEY:AIzaSyCOLsqKsxdURKveL8ypAY1Gj0qJg9vtuXs}
+  model: gemini-2.0-flash
+  base-url: https://generativelanguage.googleapis.com/v1beta
+
+# Razorpay Configuration
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:}
+  key-secret: ${RAZORPAY_KEY_SECRET:}
+  webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+
+# App Configuration
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:4200}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:4200}
+
+# Subscription Plans
+subscription:
+  free:
+    max-tests-per-month: 5
+    max-study-plans: 1
+  pro:
+    price: 499
+    currency: INR
+    max-tests-per-month: -1    # unlimited
+    max-study-plans: -1
+
+logging:
+  level:
+    root: INFO
+    com.studyplatform: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
