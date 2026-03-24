@@ -57,7 +57,6 @@ public class StudyDto {
 
         private Long subjectId;  // optional: specific subject
 
-        @Builder.Default
         private Difficulty difficulty = Difficulty.MEDIUM;
 
         @Min(5) @Max(100)
