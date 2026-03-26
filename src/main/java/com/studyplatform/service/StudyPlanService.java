@@ -107,9 +107,9 @@ public class StudyPlanService {
     /** Get user's active study plan */
     public StudyDto.StudyPlanResponse getActivePlan() {
         User user = authService.getCurrentUser();
-        StudyPlan plan = studyPlanRepo.findByUserIdAndIsActiveTrue(user.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("No active study plan found. Create one first!"));
-        return mapToResponse(plan);
+        return studyPlanRepo.findByUserIdAndIsActiveTrue(user.getId())
+                .map(this::mapToResponse)
+                .orElse(null);
     }
 
     /** Get all study plans for the current user */
