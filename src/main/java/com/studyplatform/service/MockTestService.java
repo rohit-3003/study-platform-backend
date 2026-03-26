@@ -108,8 +108,10 @@ public class MockTestService {
             throw new BusinessException("Failed to generate questions. Please try again.");
         }
 
+        // Update actual total based on successfully parsed questions
+        test.setTotalQuestions(test.getQuestions().size());
         mockTestRepo.save(test);
-        logger.info("Mock test created: {} for user: {}", test.getTitle(), user.getEmail());
+        logger.info("Mock test created: {} for user: {} with {} questions", test.getTitle(), user.getEmail(), test.getQuestions().size());
 
         return mapToResponse(test, false);
     }
@@ -145,7 +147,8 @@ public class MockTestService {
 
         // Process answers and calculate score
         int score = 0;
-        int totalMarks = test.getTotalQuestions();
+        int totalMarks = test.getQuestions().size();
+        if (totalMarks == 0) totalMarks = 1; // Prevent division by zero
         Map<String, int[]> subjectScores = new HashMap<>(); // subject -> [correct, total]
 
         for (StudyDto.AnswerSubmission answer : request.getAnswers()) {
