@@ -157,8 +157,12 @@ public class MockTestService {
                     .findFirst()
                     .ifPresent(mtq -> {
                         mtq.setUserAnswer(answer.getAnswer());
-                        boolean isCorrect = mtq.getQuestion().getCorrectAnswer()
-                                .equalsIgnoreCase(answer.getAnswer());
+                        String correctAns = mtq.getQuestion().getCorrectAnswer();
+                        String userAns = answer.getAnswer();
+                        boolean isCorrect = false;
+                        if (correctAns != null && userAns != null) {
+                            isCorrect = correctAns.trim().equalsIgnoreCase(userAns.trim());
+                        }
                         mtq.setIsCorrect(isCorrect);
                         mtq.setTimeSpentSeconds(answer.getTimeSpentSeconds());
                     });
