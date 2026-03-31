@@ -149,7 +149,6 @@ public class MockTestService {
         int score = 0;
         int totalMarks = test.getQuestions().size();
         if (totalMarks == 0) totalMarks = 1; // Prevent division by zero
-        Map<String, int[]> subjectScores = new HashMap<>(); // subject -> [correct, total]
 
         for (StudyDto.AnswerSubmission answer : request.getAnswers()) {
             test.getQuestions().stream()

@@ -24,16 +24,14 @@ public class StudyPlanService {
     private static final Logger logger = LoggerFactory.getLogger(StudyPlanService.class);
 
     private final StudyPlanRepository studyPlanRepo;
-    private final SubjectRepository subjectRepo;
     private final GeminiService geminiService;
     private final AuthService authService;
     private final ObjectMapper objectMapper;
 
-    public StudyPlanService(StudyPlanRepository studyPlanRepo, SubjectRepository subjectRepo,
+    public StudyPlanService(StudyPlanRepository studyPlanRepo,
                             GeminiService geminiService, AuthService authService,
                             ObjectMapper objectMapper) {
         this.studyPlanRepo = studyPlanRepo;
-        this.subjectRepo = subjectRepo;
         this.geminiService = geminiService;
         this.authService = authService;
         this.objectMapper = objectMapper;

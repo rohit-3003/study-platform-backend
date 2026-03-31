@@ -2,7 +2,6 @@ package com.studyplatform.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.studyplatform.entity.Difficulty;
 import com.studyplatform.entity.ExamType;
-import com.studyplatform.entity.Question;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.util.List;
