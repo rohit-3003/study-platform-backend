@@ -1,5 +1,5 @@
 package com.studyplatform.dto;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.studyplatform.entity.Difficulty;
 import com.studyplatform.entity.ExamType;
 import com.studyplatform.entity.Question;
@@ -32,6 +32,7 @@ public class StudyDto {
         private List<String> weaknesses;
         private Object planData;  // parsed JSON
         private List<StudyPlanEntryDto> entries;
+        @JsonProperty("isActive")
         private boolean isActive;
         private String createdAt;
     }
@@ -45,6 +46,7 @@ public class StudyDto {
         private String startTime;
         private String endTime;
         private int priority;
+        @JsonProperty("isCompleted")
         private boolean isCompleted;
     }
 
@@ -101,6 +103,7 @@ public class StudyDto {
         private String explanation;
         private String difficulty;
         private String userAnswer;
+        @JsonProperty("isCorrect")
         private boolean isCorrect;
     }
 
